@@ -1,8 +1,39 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+	background-color:#9DB17C;
 }
 
+#tree {
+	background-color: #82735C;
+	position: fixed;
+	top: 0px; 
+	bottom: 0px;
+	left:0px;
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+
+span {
+	margin-left: 0.5em;
+}
+div.nodeWrap {
+	margin-left: 1.2em;
+}
+span.icon:hover, span.leafLink:hover {
+	cursor: pointer;
+}
+span.leafLink {
+	color: #9CDE9F;
+}
+
+span.icon.open {
+}
+
+span.icon.isclose {
+}
+
+#data_page {
+	
+}
 a {
   color: #00B7FF;
 }

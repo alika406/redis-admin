@@ -1,7 +1,8 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Page from '../components/Page.jsx';
 
 ReactDOM.render(
-  <h1>Hello, world!</h1>,
+  <Page />,
   document.body
 );
