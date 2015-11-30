@@ -2,14 +2,34 @@ body {
 	background-color:#9DB17C;
 }
 
-#tree {
-	background-color: #82735C;
-	position: fixed;
+#sidebar {
+	background-color: #4B3B40;
+	/*position: fixed;
 	top: 0px; 
 	bottom: 0px;
 	left:0px;
 	padding-top: 15px;
-	padding-bottom: 15px;
+	padding-bottom: 15px;*/
+}
+#info {
+	text-align: center;
+}
+
+#logo {
+	font-size: 6em;
+	display: block;
+}
+
+#info > span {
+	margin: 0px;
+}
+
+#lead {
+	font-style: oblique;
+}
+
+#tree {
+	background-color: #82735C;
 }
 
 span {

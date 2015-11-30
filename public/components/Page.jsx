@@ -40,10 +40,16 @@ export default class Page extends Component {
 	render() {
 		return (
 			<div>
-				<div id = {'tree'} className = {'col-md-3'}>
-					<Tree showData = {this.showData.bind(this)}/>
+				<div id = {'sidebar'} className = {'col-md-3'}>
+					<div id = {'info'}>
+						<span id = {'logo'}>Redis</span>
+						<span id = {'lead'}>A Redis Observer</span>
+					</div>
+					<div id = {'tree'}>
+						<Tree showData = {this.showData.bind(this)}/>
+					</div>
 				</div>
-				<div id = {'data_page'}	className = {'col-md-9 col-md-offset-3'}>
+				<div id = {'data_page'}	className = {'col-md-9'}>
 					<DataPage keyName = {this.state.dataPageKey} type = {this.state.dataPageType} data = {this.state.dataPageData} />
 				</div>
 			</div>

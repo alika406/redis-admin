@@ -4,5 +4,5 @@ import Page from '../components/Page.jsx';
 
 ReactDOM.render(
   <Page />,
-  document.body
+  document.getElementById('content')
 );
