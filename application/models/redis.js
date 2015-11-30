@@ -4,6 +4,11 @@ var redisInfo = application.redis;
 var redis = require("redis"),
     client = redis.createClient(redisInfo.port, redisInfo.host);
 
+// redis 密碼驗証
+client.auth(redisInfo.password, function() {
+	console.log("Connected!");
+});
+
 // if you'd like to select database 3, instead of 0 (default), call
 // client.select(3, function() { /* ... */ });
 
