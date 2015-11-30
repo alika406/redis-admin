@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 
-export default class DataSets extends Component {
+export default class DataZset extends Component {
 	render() {
 		return (
 			<table>
 				<thead>
 					<tr>
-						<th>fieldName</th>
+						<th>score</th>
 						<th>value</th>
 					</tr>
 				</thead>

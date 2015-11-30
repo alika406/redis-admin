@@ -13,23 +13,27 @@ redisModel.keys = function (patten, callback) {
 }
 
 redisModel.type = function (key, callback) {
-	client.keys(key, callback);
+	client.type(key, callback);
 }
 
 redisModel.get = function (key, callback) {
-	client.keys(key, callback);
+	client.get(key, callback);
 }
 
 redisModel.lrange = function (key, start, stop, callback) {
-	client.keys(key, start, stop, callback);
+	client.lrange(key, start, stop, callback);
+}
+
+redisModel.smembers = function (key, callback) {
+	client.smembers(key, callback);
 }
 
 redisModel.zrange = function (key, start, stop, callback) {
-	client.keys(key, start, stop, 'WITHSCORES', callback);
+	client.zrange(key, start, stop, 'WITHSCORES', callback);
 }
 
 redisModel.hgetall = function (key, callback) {
-	client.keys(key, callback);
+	client.hgetall(key, callback);
 }
 
 module.exports = redisModel;

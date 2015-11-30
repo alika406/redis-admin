@@ -35,6 +35,8 @@ action.get = function(req, res, next) {
 	// 		]},
 	// 	]
 	// };
+	// res.send(keys);
+
 	var recusiveSetMap = function (keyArray, keyMap) {
 		var subKey = keyArray.shift();
 		var hasData = (keyArray.length === 0);
@@ -84,6 +86,9 @@ action.get = function(req, res, next) {
 		var keyArray = [];
 		var keys = {};
 
+		// 排序
+		data.sort();
+		
 		// 對每一條 key 做處理
 		data.map(function (key) {
 			keyArray = key.split(':');
@@ -93,7 +98,6 @@ action.get = function(req, res, next) {
 		// 因為 jsx 不能 foreach object，所以 child 轉成 array 會比較好處理
 		keys = {child: recusiveChangeChildToArray(keyMap)};
 
-		redis.client.quit();
 		res.send(keys);
 	});
 }
