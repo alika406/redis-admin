@@ -1,9 +1,9 @@
 module.exports = {
     entry: {
-	index:"./javascripts/index.js"
+	   index:"./assets/javascripts/index.js"
     },
     output: {
-        filename: "./bundle/[name].js"
+        filename: "./public/javascripts/[name]-bundle.js"
     },
 module: {
         loaders: [
