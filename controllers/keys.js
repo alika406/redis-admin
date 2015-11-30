@@ -1,7 +1,6 @@
-var action = {};
 var redis = require('../models/redis.js');
 
-var util = require('util');
+var action = {};
 
 action.get = function(req, res, next) {
 	// var keys = {
