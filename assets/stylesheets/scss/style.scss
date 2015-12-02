@@ -1,0 +1,57 @@
+body {
+	background-color:#9DB17C;
+	#sidebar {
+		background-color: #4B3B40;
+		/*position: fixed;
+		top: 0px; 
+		bottom: 0px;
+		left:0px;
+		padding-top: 15px;
+		padding-bottom: 15px;*/
+	}
+}
+
+
+#info {
+	text-align: center;
+}
+
+#logo {
+	font-size: 6em;
+	display: block;
+}
+
+#info > span {
+	margin: 0px;
+}
+
+#lead {
+	font-style: oblique;
+}
+
+#tree {
+	background-color: #82735C;
+}
+
+span {
+	margin-left: 0.5em;
+}
+div.nodeWrap {
+	margin-left: 1.2em;
+}
+span.icon:hover, span.leafLink:hover {
+	cursor: pointer;
+}
+span.leafLink {
+	color: #9CDE9F;
+}
+
+span.icon.open {
+}
+
+span.icon.isclose {
+}
+
+#data_page {
+	
+}
