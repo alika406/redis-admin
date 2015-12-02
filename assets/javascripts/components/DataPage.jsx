@@ -28,12 +28,20 @@ export default class DataPage extends Component {
 
 		return (
 			<div>
-				<h1>key:</h1>
-					<span>{this.props.keyName}</span>
-				<h1>type:</h1>
-					<span>{this.props.type}</span>
-				<h1>data:</h1>
+				<div className = "infoBlock">
+					<div>
+						<span className = "title">key:</span><span>{this.props.keyName}</span>
+					</div>
+					<div>
+						<span className = "title">type:</span><span>{this.props.type}</span>
+					</div>
+					<div>
+						<span className = "title">data:</span>
+					</div>
+				</div>
+				<div className = "dataBlock">
 					{dataBlock}
+				</div>
 			</div>
 		)
 	}

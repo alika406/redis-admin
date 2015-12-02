@@ -4,9 +4,7 @@ export default class KeyNode extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			isOpen: false,
-			hasData: this.props.hasData,
-			child: this.props.child
+			isOpen: false
 		};
 	}
 	handleSwich() {
@@ -21,22 +19,32 @@ export default class KeyNode extends Component {
 		console.log('reload');
 	}
 	render() {
-		var childCount = Object.keys(this.state.child).length;
-		const keyNameElement = (this.state.hasData) ? <span className = {'leafLink'} onClick = {this.handleClickLeaf.bind(this)}>{this.props.subKeyName}</span> : <span>{this.props.subKeyName}</span>;
-		var nodeElement = [];
-		if (childCount !== 0) {
-			nodeElement.push(<span className = {'icon node isclose'} onClick = {this.handleSwich.bind(this)}>▾</span>);
+		var nodeIconClass = '';
+		var nodeIconElemnt = '';
+		var childCount = Object.keys(this.props.child).length;
+
+		if (childCount === 0) {
+			nodeIconElemnt = <span className = {'icon node none glyphicon glyphicon-file'}></span>;
+		} else {
+			nodeIconClass = (this.state.isOpen) ? 'open glyphicon glyphicon-folder-open' : 'isclose glyphicon glyphicon-folder-close';
+			nodeIconElemnt = <span className = {'icon node ' + nodeIconClass} onClick = {this.handleSwich.bind(this)}></span>
 		}
+
+		var keyNameElement = (this.props.hasData) ? <span className = {'leafLink'} onClick = {this.handleClickLeaf.bind(this)}>{this.props.subKeyName}</span> : <span>{this.props.subKeyName}</span>;
+		var nodeElement = [];
+
+		nodeElement.push(nodeIconElemnt);
 		nodeElement.push(keyNameElement);
 		if (childCount !== 0) {
 			nodeElement.push(<span className = {'icon reload'} onClick = {this.handleReload.bind(this)}>o</span>);
 		}
+		
 		var childBlock = '';
 		if (this.state.isOpen) {
 			childBlock = (
 				<div className = {'childWrap'}>
 				{
-					this.state.child.map((node, i) => {
+					this.props.child.map((node, i) => {
 						var keyName = this.props.keyName+':'+node.subKeyName;
 						return (
 							<KeyNode 

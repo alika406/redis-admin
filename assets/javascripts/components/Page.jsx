@@ -39,7 +39,7 @@ export default class Page extends Component {
 	}
 	render() {
 		return (
-			<div>
+			<div id = {'page'}>
 				<div id = {'sidebar'} className = {'col-md-3'}>
 					<div id = {'info'}>
 						<span id = {'logo'}>Redis</span>
