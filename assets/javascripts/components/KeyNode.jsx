@@ -7,7 +7,7 @@ export default class KeyNode extends Component {
 			isOpen: false
 		};
 	}
-	handleSwich() {
+	handleSwitch() {
 		this.setState({
 			isOpen: !this.state.isOpen
 		});
@@ -19,54 +19,44 @@ export default class KeyNode extends Component {
 		console.log('reload');
 	}
 	render() {
-		var nodeIconClass = '';
-		var nodeIconElemnt = '';
 		var childCount = Object.keys(this.props.child).length;
+		var nodeIconlasses = ['icon', 'node', 'glyphicon'];
 
 		if (childCount === 0) {
-			nodeIconElemnt = <span className = {'icon node none glyphicon glyphicon-file'}></span>;
+			nodeIconlasses = nodeIconlasses.concat(['none', 'glyphicon-file']);
 		} else {
-			nodeIconClass = (this.state.isOpen) ? 'open glyphicon glyphicon-folder-open' : 'isclose glyphicon glyphicon-folder-close';
-			nodeIconElemnt = <span className = {'icon node ' + nodeIconClass} onClick = {this.handleSwich.bind(this)}></span>
+			nodeIconlasses = (this.state.isOpen) ? nodeIconlasses.concat(['open', 'glyphicon-folder-open']) : nodeIconlasses.concat(['isclose', 'glyphicon-folder-close']);
 		}
+		nodeIconlasses = nodeIconlasses.join(' ');
 
-		var keyNameElement = (this.props.hasData) ? <span className = {'leafLink'} onClick = {this.handleClickLeaf.bind(this)}>{this.props.subKeyName}</span> : <span>{this.props.subKeyName}</span>;
 		var nodeElement = [];
+		var nodeIconElemnt = (childCount === 0) ? <span className = {nodeIconlasses}></span> : <span className = {nodeIconlasses} onClick = {this.handleSwitch.bind(this)}></span>;
+		var keyNameElement = (this.props.hasData) ? <span className = "leafLink" onClick = {this.handleClickLeaf.bind(this)}>{this.props.subKeyName}</span> : <span>{this.props.subKeyName}</span>;
+		var reloadElement =  (childCount === 0) ? '' : <span className = "icon reload" onClick = {this.handleReload.bind(this)}></span>;
 
 		nodeElement.push(nodeIconElemnt);
 		nodeElement.push(keyNameElement);
-		if (childCount !== 0) {
-			nodeElement.push(<span className = {'icon reload'} onClick = {this.handleReload.bind(this)}></span>);
-		}
+		nodeElement.push(reloadElement);
 		
-		var childBlock = '';
-		if (this.state.isOpen) {
-			childBlock = (
-				<div className = {'childWrap'}>
-				{
-					this.props.child.map((node, i) => {
-						var keyName = this.props.keyName+':'+node.subKeyName;
-						return (
-							<KeyNode 
-								{...node} 
-								showData = {this.props.showData} 
-								keyName = {keyName} 
-								key = {'key-'+i} 
-							/>
-						)
-					})
-				}
-				</div>
-			);
-		}
+		var childWrapClass = (this.state.isOpen) ? 'childWrap abc' : 'childWrap none';
+		var child = this.props.child.map((node, i) => {
+			var keyName = this.props.keyName+':'+node.subKeyName;
+			return (
+				<KeyNode
+					{...node}
+					showData = {this.props.showData}
+					keyName = {keyName}
+					key = {'key-'+i}
+				/>
+			)
+		});
+
 		return (
-			<div className = {'nodeWrap'}>
-				{
-					nodeElement.map((elemnet) => {
-						return elemnet;
-					})
-				}
-				{childBlock}
+			<div className = "nodeWrap">
+				{nodeElement}
+				<div className = {childWrapClass}>
+					{child}
+				</div>
 			</div>
 		)
 	}

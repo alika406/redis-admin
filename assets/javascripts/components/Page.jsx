@@ -14,20 +14,14 @@ export default class Page extends Component {
 		};
 	}
 	showData(key) {
-		this.setState({
-			dataPageKey: key
-		});
-		var getDataDetail = this.getDataDetail.bind(this);
-		getDataDetail(key)
-	}
-	getDataDetail(keyName) {
 		var url = '/data';
 		$.ajax({
-	      url: url+'?keyName='+keyName,
+	      url: url+'?keyName='+key,
 	      dataType: 'json',
 	      cache: false,
 	      success: function(data) {
 	        this.setState({
+				dataPageKey: key,
 	        	dataPageType: data.type,
 	        	dataPageData: data.data
 	        });
@@ -39,17 +33,17 @@ export default class Page extends Component {
 	}
 	render() {
 		return (
-			<div id = {'page'}>
-				<div id = {'sidebar'} className = {'col-md-3'}>
-					<div id = {'info'}>
-						<span id = {'logo'}>Redis</span>
-						<span id = {'lead'}>Redis Admin</span>
+			<div id = "page">
+				<div id = "sidebar" className = "col-md-3">
+					<div id = "info">
+						<span id = "logo">Redis</span>
+						<span id = "lead">Redis Admin</span>
 					</div>
-					<div id = {'tree'}>
+					<div id = "tree">
 						<Tree showData = {this.showData.bind(this)}/>
 					</div>
 				</div>
-				<div id = {'data_page'}	className = {'col-md-9'}>
+				<div id = "data_page"	className = "col-md-9">
 					<DataPage keyName = {this.state.dataPageKey} type = {this.state.dataPageType} data = {this.state.dataPageData} />
 				</div>
 			</div>

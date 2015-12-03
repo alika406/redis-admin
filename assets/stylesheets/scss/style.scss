@@ -57,6 +57,9 @@ body {
 		.nodeWrap {
 			margin-left: 1.2em;
 		}
+		.childWrap.none {
+			display: none;
+		}
 		.icon:hover, .leafLink:hover {
 			cursor: pointer;
 		}

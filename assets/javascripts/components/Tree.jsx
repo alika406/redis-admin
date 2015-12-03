@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import KeyNode from './KeyNode.jsx';
 import $ from 'jquery';
+
+import KeyNode from './KeyNode.jsx';
 
 export default class Tree extends Component {
 	constructor(props) {
