@@ -36,7 +36,7 @@ export default class KeyNode extends Component {
 		nodeElement.push(nodeIconElemnt);
 		nodeElement.push(keyNameElement);
 		if (childCount !== 0) {
-			nodeElement.push(<span className = {'icon reload'} onClick = {this.handleReload.bind(this)}>o</span>);
+			nodeElement.push(<span className = {'icon reload'} onClick = {this.handleReload.bind(this)}></span>);
 		}
 		
 		var childBlock = '';

@@ -78,11 +78,11 @@ body {
 }
 
 #data_page {
-	overflow: auto;
-
+	height: 100%;
 	.infoBlock {
 		font-size: 1.5em;
-		overflow: auto;
+		overflow: auto; /* for float */
+		height: 100px;
 		.title {
 			float: left;
 			text-align: right;
@@ -91,7 +91,12 @@ body {
 	}
 
 	.dataBlock {
-		margin-left: 100px;
+		overflow: auto;
+		position: absolute;
+		top: 100px;
+		bottom: 0px;
+		left: 100px;
+		right: 0px;
 		th {
 			background-color: $lightFirstColor;
 			font-weight:bold;
