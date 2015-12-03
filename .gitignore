@@ -1,3 +1,13 @@
+# node_modules
 /node_modules
+
+# complied file
 /public/javascripts
+/public/stylesheets
+
+# css vendors
+!/public/stylesheets/reset.css
+!/public/stylesheets/bootstrap.min.css
+
+# express error log
 npm-debug.log*
