@@ -1,7 +1,10 @@
-$darkFirstColor: #230903;
-$lightFirstColor: #656256;
-$darkSecondColor: #D3B88C;
-$lightSecondColor: #F4F2F3;
+$darkFirstColor: #222222;
+$lightFirstColor: #9D9D9D;
+$darkSecondColor: #EEEEEE;
+$lightSecondColor: #F5F5F5;
+$active: #428BCA;
+
+@import url(https://fonts.googleapis.com/css?family=Fjalla+One);
 
 body {
 	background-color: $lightSecondColor;
@@ -28,6 +31,7 @@ body {
 		}
 
 		#logo {
+			font-family: 'Fjalla One', sans-serif;
 			color: $lightFirstColor;
 			font-size: 6em;
 			display: block;
@@ -38,13 +42,14 @@ body {
 		}
 	}
 	#tree {
-		background-color: $lightFirstColor;
+		background-color: $darkSecondColor;
 		position: absolute;
 		top: 150px;
 		bottom: 15px;
 		left: 15px;
 		right: 15px;
 		overflow: auto;
+		border-radius: 5px;
 
 		padding-top: 0.5em;
 		padding-bottom: 0.5em;
@@ -56,7 +61,7 @@ body {
 			cursor: pointer;
 		}
 		.leafLink {
-			color: $darkSecondColor;
+			color: $active;
 		}
 		.icon {
 			&.open {
@@ -76,7 +81,7 @@ body {
 	overflow: auto;
 
 	.infoBlock {
-		font-size: 2em;
+		font-size: 1.5em;
 		overflow: auto;
 		.title {
 			float: left;
@@ -88,7 +93,7 @@ body {
 	.dataBlock {
 		margin-left: 100px;
 		th {
-			background-color: darken(#F4F2F3, 50%);
+			background-color: $lightFirstColor;
 			font-weight:bold;
 		}
 		td {

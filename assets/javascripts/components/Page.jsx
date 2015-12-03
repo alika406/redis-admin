@@ -43,7 +43,7 @@ export default class Page extends Component {
 				<div id = {'sidebar'} className = {'col-md-3'}>
 					<div id = {'info'}>
 						<span id = {'logo'}>Redis</span>
-						<span id = {'lead'}>A Redis Observer</span>
+						<span id = {'lead'}>Redis Admin</span>
 					</div>
 					<div id = {'tree'}>
 						<Tree showData = {this.showData.bind(this)}/>
