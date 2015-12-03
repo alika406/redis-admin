@@ -1,57 +1,98 @@
+$darkFirstColor: #230903;
+$lightFirstColor: #656256;
+$darkSecondColor: #D3B88C;
+$lightSecondColor: #F4F2F3;
+
 body {
-	background-color:#9DB17C;
-	#sidebar {
-		background-color: #4B3B40;
-		/*position: fixed;
+	background-color: $lightSecondColor;
+	span {
+		margin-left: 0.5em;
+	}
+	#page {
+		position: fixed;
 		top: 0px; 
 		bottom: 0px;
 		left:0px;
-		padding-top: 15px;
-		padding-bottom: 15px;*/
+		right: 0px;
 	}
 }
 
+#sidebar {
+	background-color: $darkFirstColor;
+	height: 100%;
 
-#info {
-	text-align: center;
-}
+	#info {
+		text-align: center;
+		span {
+			margin: 0px;
+		}
 
-#logo {
-	font-size: 6em;
-	display: block;
-}
+		#logo {
+			color: $lightFirstColor;
+			font-size: 6em;
+			display: block;
+		}
+		#lead {
+			color: $darkSecondColor;
+			font-style: oblique;
+		}
+	}
+	#tree {
+		background-color: $lightFirstColor;
+		position: absolute;
+		top: 150px;
+		bottom: 15px;
+		left: 15px;
+		right: 15px;
+		overflow: auto;
 
-#info > span {
-	margin: 0px;
-}
+		padding-top: 0.5em;
+		padding-bottom: 0.5em;
 
-#lead {
-	font-style: oblique;
-}
-
-#tree {
-	background-color: #82735C;
-}
-
-span {
-	margin-left: 0.5em;
-}
-div.nodeWrap {
-	margin-left: 1.2em;
-}
-span.icon:hover, span.leafLink:hover {
-	cursor: pointer;
-}
-span.leafLink {
-	color: #9CDE9F;
-}
-
-span.icon.open {
-}
-
-span.icon.isclose {
+		.nodeWrap {
+			margin-left: 1.2em;
+		}
+		.icon:hover, .leafLink:hover {
+			cursor: pointer;
+		}
+		.leafLink {
+			color: $darkSecondColor;
+		}
+		.icon {
+			&.open {
+			}
+			&.isclose {
+			}
+			&.none {
+				&:hover {
+					cursor: default;
+				}
+			}
+		}
+	}
 }
 
 #data_page {
-	
+	overflow: auto;
+
+	.infoBlock {
+		font-size: 2em;
+		overflow: auto;
+		.title {
+			float: left;
+			text-align: right;
+			width: 2.5em;
+		}
+	}
+
+	.dataBlock {
+		margin-left: 100px;
+		th {
+			background-color: darken(#F4F2F3, 50%);
+			font-weight:bold;
+		}
+		td {
+			min-width: 200px
+		}
+	}
 }
