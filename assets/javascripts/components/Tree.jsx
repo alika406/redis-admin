@@ -6,30 +6,12 @@ import KeyNode from './KeyNode.jsx';
 export default class Tree extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			child: []
-		};
-		this.getKeys('');
-	}
-	getKeys(keyPrefix) {
-		var url = '/keys';
-		$.ajax({
-	      url: url+'?keyPrefix='+keyPrefix,
-	      dataType: 'json',
-	      cache: false,
-	      success: function(data) {
-	        this.setState({child: data.child});
-	      }.bind(this),
-	      error: function(xhr, status, err) {
-	        console.error(url, status, err.toString());
-	      }.bind(this)
-	    });
 	}
 	render() {
 		return (
-			<div>
+			<div id = "tree">
 				{
-					this.state.child.map((node, i) => {
+					this.props.keyTree.map((node, i) => {
 						return (
 							<KeyNode 
 								{...node} 

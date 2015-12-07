@@ -41,10 +41,14 @@ body {
 			font-style: oblique;
 		}
 	}
+	#serverInfo {
+		background-color: $darkSecondColor;
+		border-radius: 5px;
+	}
 	#tree {
 		background-color: $darkSecondColor;
 		position: absolute;
-		top: 150px;
+		top: 190px;
 		bottom: 15px;
 		left: 15px;
 		right: 15px;

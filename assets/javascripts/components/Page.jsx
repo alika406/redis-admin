@@ -3,6 +3,7 @@ import $ from 'jquery';
 
 import Tree from '../components/Tree.jsx';
 import DataPage from '../components/DataPage.jsx';
+import ServerInfo from '../components/ServerInfo.jsx';
 
 export default class Page extends Component {
 	constructor(props) {
@@ -10,13 +11,64 @@ export default class Page extends Component {
 		this.state = {
 			dataPageKey: '',
 			dataPageType: '',
-			dataPageData: []
+			dataPageData: [],
+			serverList: [],
+			currentServerId: 0,
+			serverKeyNum: 0,
+			keyTree:[],
 		};
+	}
+	componentDidMount() {
+		this.getServerList();
+	}
+	handleChangeServer() {
+		let currentServerId = '';
+		this.setState({
+			currentServerId: currentServerId
+		});
+		this.getKeysAndNumber.bind(this, currentServerId);
+	}
+	getServerList() {
+		var url = '/server';
+		$.ajax({
+			url: url,
+			dataType: 'json',
+			cache: false,
+			success: function(data) {
+				this.setState({
+					serverList: data,
+				});
+
+				var getKeysAndNumber = this.getKeysAndNumber.bind(this);
+				getKeysAndNumber(this.state.currentServerId);
+
+			}.bind(this),
+			error: function(xhr, status, err) {
+				console.error(url, status, err.toString());
+			}.bind(this)
+	    });
+	}
+	getKeysAndNumber(serverId) {
+		var url = '/keys';
+		$.ajax({
+			url: url+'?serverId='+serverId,
+			dataType: 'json',
+			cache: false,
+			success: function(data) {
+				this.setState({
+					serverKeyNum: data.keyNum,
+					keyTree: data.keyTree,
+				});
+			}.bind(this),
+			error: function(xhr, status, err) {
+				console.error(url, status, err.toString());
+			}.bind(this)
+	    });
 	}
 	showData(key) {
 		var url = '/data';
 		$.ajax({
-	      url: url+'?keyName='+key,
+	      url: url+'?serverId='+this.state.currentServerId+'&keyName='+key,
 	      dataType: 'json',
 	      cache: false,
 	      success: function(data) {
@@ -39,9 +91,8 @@ export default class Page extends Component {
 						<span id = "logo">Redis</span>
 						<span id = "lead">Redis Admin</span>
 					</div>
-					<div id = "tree">
-						<Tree showData = {this.showData.bind(this)}/>
-					</div>
+					<ServerInfo serverList = {this.state.serverList} currentServerId = {this.state.currentServerId} serverKeyNum = {this.state.serverKeyNum} />
+					<Tree keyTree = {this.state.keyTree} showData = {this.showData.bind(this)}/>
 				</div>
 				<div id = "data_page"	className = "col-md-9">
 					<DataPage keyName = {this.state.dataPageKey} type = {this.state.dataPageType} data = {this.state.dataPageData} />

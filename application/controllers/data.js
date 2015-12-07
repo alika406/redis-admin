@@ -44,27 +44,32 @@ action.get = function(req, res, next) {
 	// };
 	// res.send(dataSet.hash);
 
+	var serverId = req.query.serverId;
 	var keyName = req.query.keyName;
-	redis.type(keyName, function (error, type) {
+	
+	// 選擇 server
+	redis.selectServer(serverId);
+	
+	redis.type(keyName, function (type) {
 
 		switch (type) {
 			case 'string':
-				redis.get(keyName, function (error, data) {
+				redis.get(keyName, function (data) {
 					res.send({type: 'string', data: [data]});	
 				});
 				break;
 			case 'list':
-				redis.lrange(keyName, 0, -1, function (error, data) {
+				redis.lrange(keyName, 0, -1, function (data) {
 					res.send({type: 'list', data: data});	
 				});
 				break;
 			case 'set':
-				redis.smembers(keyName, function (error, data) {
+				redis.smembers(keyName, function (data) {
 					res.send({type: 'set', data: data});	
 				});
 				break;
 			case 'zset':
-				redis.zrange(keyName, 0, -1, function (error, data) {
+				redis.zrange(keyName, 0, -1, function (data) {
 					var dataArray = [];
 					// 出來 score, value 混在一起了…
 					for (var i = 0; i <= (data.length - 2); i += 2) {
@@ -74,7 +79,7 @@ action.get = function(req, res, next) {
 				});
 				break;
 			case 'hash':
-				redis.hgetall(keyName, function (error, data) {
+				redis.hgetall(keyName, function (data) {
 					var dataArray = [];
 					// 變 array
 					for (var key in data) {

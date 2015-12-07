@@ -4,7 +4,7 @@ var action = {};
 
 action.get = function(req, res, next) {
 	// var keys = {
-	// 	child:[
+	// 	keyTree:[
 	// 		{'subKeyName': 'aa', 'hasData': true, child:[
 	// 		]},
 	// 		{'subKeyName': 'bb', 'hasData': true, child:[
@@ -77,15 +77,26 @@ action.get = function(req, res, next) {
 		return keyMap;
 	};
 
+	var serverId = req.query.serverId;
+
 	// 找 key 用 patten
-	var patten = (req.query.keyPrefix === '') ? '*' : req.query.keyPrefix + ':*'
+	var patten = (req.query.keyPrefix === undefined) ? '*' : req.query.keyPrefix + ':*'
+
+	// 選擇 server
+	redis.selectServer(serverId);
 
 	// redis 取 key
-	redis.keys(patten, function (error, data) {
+	redis.keys(patten, function (data) {
 		var keyMap = {};
 		var keyArray = [];
 		var keys = {};
 
+		if (data === undefined) {
+			res.send({
+				keyNum: 0,
+				keyTree: [] 
+			});	
+		}
 		// 排序
 		data.sort();
 		
@@ -96,7 +107,10 @@ action.get = function(req, res, next) {
 		});
 
 		// 因為 jsx 不能 foreach object，所以 child 轉成 array 會比較好處理
-		keys = {child: recusiveChangeChildToArray(keyMap)};
+		keys = {
+			keyNum: data.length,
+			keyTree: recusiveChangeChildToArray(keyMap)
+		};
 
 		res.send(keys);
 	});
