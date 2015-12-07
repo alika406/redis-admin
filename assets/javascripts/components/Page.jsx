@@ -21,12 +21,12 @@ export default class Page extends Component {
 	componentDidMount() {
 		this.getServerList();
 	}
-	handleChangeServer() {
-		let currentServerId = '';
+	changeServer(serverId) {
 		this.setState({
-			currentServerId: currentServerId
+			currentServerId: serverId
 		});
-		this.getKeysAndNumber.bind(this, currentServerId);
+		let getKeysAndNumber = this.getKeysAndNumber.bind(this);
+		getKeysAndNumber(serverId);
 	}
 	getServerList() {
 		var url = '/server';
@@ -91,7 +91,7 @@ export default class Page extends Component {
 						<span id = "logo">Redis</span>
 						<span id = "lead">Redis Admin</span>
 					</div>
-					<ServerInfo serverList = {this.state.serverList} currentServerId = {this.state.currentServerId} serverKeyNum = {this.state.serverKeyNum} />
+					<ServerInfo changeServer = {this.changeServer.bind(this)} serverList = {this.state.serverList} currentServerId = {this.state.currentServerId} serverKeyNum = {this.state.serverKeyNum} />
 					<Tree keyTree = {this.state.keyTree} showData = {this.showData.bind(this)}/>
 				</div>
 				<div id = "data_page"	className = "col-md-9">
