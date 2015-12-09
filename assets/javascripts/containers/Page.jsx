@@ -77,7 +77,7 @@ class Page extends Component {
 						<span id = "lead">Redis Admin</span>
 					</div>
 					<ServerInfo changeServer = {this.changeServer.bind(this)} serverList = {this.props.serverList} currentServerId = {this.props.currentServerId} serverKeyNum = {this.props.serverKeyNum} />
-					<Tree keyTree = {this.props.keyTree} showData = {this.showData.bind(this)}/>
+					<Tree key = {'key'+this.props.currentServerId} keyTree = {this.props.keyTree} showData = {this.showData.bind(this)}/>
 				</div>
 				<div id = "data_page"	className = "col-md-9">
 					<DataPage keyName = {this.props.dataPageKey} type = {this.props.dataPageType} data = {this.props.dataPageData} />
