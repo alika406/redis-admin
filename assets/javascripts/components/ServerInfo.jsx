@@ -1,14 +1,14 @@
-import React, {Component} from 'react';
+import React, {Component} from 'react'
 
 export default class ServerInfo extends Component {
 	handleChangeServer() {
-		this.props.changeServer(this.refs.server.value);
+		this.props.changeServer(this.refs.server.value)
 	}
 	render() {
-		let serverOption = [];
+		let serverOption = []
 		this.props.serverList.map((data, i) => { 
-			serverOption.push(<option key = {"key"+i} value={data.serverId}>{data.displayName}</option>);
-		});
+			serverOption.push(<option key = {"key"+i} value={data.serverId}>{data.displayName}</option>)
+		})
 		return (
 			<div id="serverInfo">
 				<span>SERVER:</span>
@@ -17,6 +17,6 @@ export default class ServerInfo extends Component {
 				</select><br />
 				<span>KEY NUMBER:</span><span>{this.props.serverKeyNum}</span>
 			</div>
-		);
+		)
 	}
 }

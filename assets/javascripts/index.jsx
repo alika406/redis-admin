@@ -18,4 +18,4 @@ ReactDOM.render(
       <Page />
    </Provider>,
   document.getElementById('content')
-);
+)

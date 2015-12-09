@@ -1,12 +1,9 @@
-import React, {Component} from 'react';
-import $ from 'jquery';
+import React, {Component} from 'react'
+import $ from 'jquery'
 
-import KeyNode from './KeyNode.jsx';
+import KeyNode from './KeyNode.jsx'
 
 export default class Tree extends Component {
-	constructor(props) {
-		super(props);
-	}
 	render() {
 		return (
 			<div id = "tree">

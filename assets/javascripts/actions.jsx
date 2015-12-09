@@ -5,6 +5,7 @@ export const INITIAL = 'INITIAL'
 export const CHANGE_SERVER = 'CHANGE_SERVER'
 export const SHOW_KEY_DATA = 'SHOW_KEY_DATA'
 
+// action creator
 function initialActionCreator(serverList, keys) {
 	return {
 		type: INITIAL,
@@ -29,6 +30,7 @@ function showKeyDataActionCreator(key, keyData) {
 	}
 }
 
+// ajax function 
 function getServerList() {
 	return axios.get('/server')
 }
