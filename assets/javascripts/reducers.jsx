@@ -1,4 +1,4 @@
-import {INITIAL, CHANGE_SERVER, SHOW_KEY_DATA} from './actions'
+import {INITIAL, CHANGE_SERVER, SHOW_KEY_DATA} from './actions.jsx'
 
 let initState = {
 	dataPageKey: '',

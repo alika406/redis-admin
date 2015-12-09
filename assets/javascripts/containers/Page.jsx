@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'
-import {initial, changeServer, showKeyData} from '../actions'
+import {initial, changeServer, showKeyData} from '../actions.jsx'
 import $ from 'jquery';
 
 import Tree from '../components/Tree.jsx';
