@@ -11,7 +11,7 @@ var config = {
     //     }
     // },
     entry: {
-	   index:"./assets/javascripts/index.js",
+	   index:"./assets/javascripts/index.jsx",
        style:"./assets/stylesheets/style.js",
        // vendors: "./assets/stylesheets/vendors.js",
     },

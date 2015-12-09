@@ -1,47 +1,39 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux'
+import {initial, changeServer, showKeyData} from '../actions'
 import $ from 'jquery';
 
 import Tree from '../components/Tree.jsx';
 import DataPage from '../components/DataPage.jsx';
 import ServerInfo from '../components/ServerInfo.jsx';
 
-export default class Page extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			dataPageKey: '',
-			dataPageType: '',
-			dataPageData: [],
-			serverList: [],
-			currentServerId: 0,
-			serverKeyNum: 0,
-			keyTree:[],
-		};
-	}
+class Page extends Component {
 	componentDidMount() {
-		this.getServerList();
+		this.initialData();
 	}
 	changeServer(serverId) {
-		this.setState({
-			currentServerId: serverId
-		});
 		let getKeysAndNumber = this.getKeysAndNumber.bind(this);
 		getKeysAndNumber(serverId);
 	}
-	getServerList() {
+	initialData() {
 		var url = '/server';
 		$.ajax({
 			url: url,
 			dataType: 'json',
 			cache: false,
-			success: function(data) {
-				this.setState({
-					serverList: data,
+			success: function(serverList) {
+				var url = '/keys';
+				$.ajax({
+					url: url+'?serverId='+this.props.currentServerId,
+					dataType: 'json',
+					cache: false,
+					success: function(keys) {
+						this.props.dispatch(initial(serverList, keys))
+					}.bind(this),
+					error: function(xhr, status, err) {
+						console.error(url, status, err.toString());
+					}.bind(this)
 				});
-
-				var getKeysAndNumber = this.getKeysAndNumber.bind(this);
-				getKeysAndNumber(this.state.currentServerId);
-
 			}.bind(this),
 			error: function(xhr, status, err) {
 				console.error(url, status, err.toString());
@@ -55,10 +47,7 @@ export default class Page extends Component {
 			dataType: 'json',
 			cache: false,
 			success: function(data) {
-				this.setState({
-					serverKeyNum: data.keyNum,
-					keyTree: data.keyTree,
-				});
+				this.props.dispatch(changeServer(serverId, data))
 			}.bind(this),
 			error: function(xhr, status, err) {
 				console.error(url, status, err.toString());
@@ -68,15 +57,11 @@ export default class Page extends Component {
 	showData(key) {
 		var url = '/data';
 		$.ajax({
-	      url: url+'?serverId='+this.state.currentServerId+'&keyName='+key,
+	      url: url+'?serverId='+this.props.currentServerId+'&keyName='+key,
 	      dataType: 'json',
 	      cache: false,
 	      success: function(data) {
-	        this.setState({
-				dataPageKey: key,
-	        	dataPageType: data.type,
-	        	dataPageData: data.data
-	        });
+			  this.props.dispatch(showKeyData(key, data))
 	      }.bind(this),
 	      error: function(xhr, status, err) {
 	        console.error(url, status, err.toString());
@@ -91,13 +76,19 @@ export default class Page extends Component {
 						<span id = "logo">Redis</span>
 						<span id = "lead">Redis Admin</span>
 					</div>
-					<ServerInfo changeServer = {this.changeServer.bind(this)} serverList = {this.state.serverList} currentServerId = {this.state.currentServerId} serverKeyNum = {this.state.serverKeyNum} />
-					<Tree keyTree = {this.state.keyTree} showData = {this.showData.bind(this)}/>
+					<ServerInfo changeServer = {this.changeServer.bind(this)} serverList = {this.props.serverList} currentServerId = {this.props.currentServerId} serverKeyNum = {this.props.serverKeyNum} />
+					<Tree keyTree = {this.props.keyTree} showData = {this.showData.bind(this)}/>
 				</div>
 				<div id = "data_page"	className = "col-md-9">
-					<DataPage keyName = {this.state.dataPageKey} type = {this.state.dataPageType} data = {this.state.dataPageData} />
+					<DataPage keyName = {this.props.dataPageKey} type = {this.props.dataPageType} data = {this.props.dataPageData} />
 				</div>
 			</div>
 		)
 	}
 }
+
+function selector(state) {
+	return state;
+}
+
+export default connect(selector)(Page)
