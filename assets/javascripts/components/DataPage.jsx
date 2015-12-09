@@ -5,18 +5,19 @@ import DataHash from './DataHash.jsx'
 
 export default class DataPage extends Component {
 	render() {
-		var dataBlock = ''
-		switch (this.props.type) {
+		const {keyName, type, data} = this.props
+		let dataBlock = ''
+		switch (type) {
 			case 'string':
 			case 'list':
 			case 'set':
-				dataBlock = <DataSingle data = {this.props.data}/>
+				dataBlock = <DataSingle data = {data}/>
 				break
 			case 'zset':
-				dataBlock = <DataZset data = {this.props.data}/>
+				dataBlock = <DataZset data = {data}/>
 				break
 			case 'hash':
-				dataBlock = <DataHash data = {this.props.data}/>
+				dataBlock = <DataHash data = {data}/>
 				break
 			default:
 				dataBlock = <span>node data</span>
@@ -27,10 +28,10 @@ export default class DataPage extends Component {
 			<div>
 				<div className = "infoBlock">
 					<div>
-						<span className = "title">key:</span><span>{this.props.keyName}</span>
+						<span className = "title">key:</span><span>{keyName}</span>
 					</div>
 					<div>
-						<span className = "title">type:</span><span>{this.props.type}</span>
+						<span className = "title">type:</span><span>{type}</span>
 					</div>
 					<div>
 						<span className = "title">data:</span>

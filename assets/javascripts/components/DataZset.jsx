@@ -15,7 +15,7 @@ export default class DataZset extends Component {
 					{
 						this.props.data.map((data, i) => {
 							return (
-								<tr key = {'key-'+i}>
+								<tr key = {`key-${i}`}>
 									<td>{i}</td>
 									<td>{data.score}</td>
 									<td>{data.value}</td>

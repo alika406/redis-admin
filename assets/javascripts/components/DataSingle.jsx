@@ -8,7 +8,7 @@ export default class DataSingle extends Component {
 					{
 						this.props.data.map((value, i) => {
 							return (
-								<tr key = {'key-'+i}>
+								<tr key = {`key-${i}`}>
 									<td>{i}</td>
 									<td>{value}</td>
 								</tr>

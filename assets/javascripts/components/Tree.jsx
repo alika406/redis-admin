@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import $ from 'jquery'
 
 import KeyNode from './KeyNode.jsx'
 
@@ -14,7 +13,7 @@ export default class Tree extends Component {
 								{...node} 
 								showData = {this.props.showData} 
 								keyName = {node.subKeyName} 
-								key = {'key-'+i} 
+								key = {`key-${i}`} 
 							/>
 						)
 					})

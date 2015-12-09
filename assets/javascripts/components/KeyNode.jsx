@@ -6,6 +6,9 @@ export default class KeyNode extends Component {
 		this.state = {
 			isOpen: false
 		}
+		this.handleSwitch = this.handleSwitch.bind(this)
+		this.handleClickLeaf = this.handleClickLeaf.bind(this)
+		this.handlereload = this.handleReload.bind(this)  
 	}
 	handleSwitch() {
 		this.setState({
@@ -19,29 +22,40 @@ export default class KeyNode extends Component {
 		console.log('reload')
 	}
 	render() {
-		let childCount = Object.keys(this.props.child).length
+		const {keyName, hasData, subKeyName, child, showData} = this.props
+		let childCount = Object.keys(child).length
 		let nodeIconlasses = ['icon', 'node', 'glyphicon']
 
 		if (childCount === 0) {
 			nodeIconlasses = nodeIconlasses.concat(['none', 'glyphicon-file'])
 		} else {
-			nodeIconlasses = (this.state.isOpen) ? nodeIconlasses.concat(['open', 'glyphicon-folder-open']) : nodeIconlasses.concat(['isclose', 'glyphicon-folder-close'])
+			nodeIconlasses = (this.state.isOpen) 
+				? nodeIconlasses.concat(['open', 'glyphicon-folder-open'])
+				: nodeIconlasses.concat(['isclose', 'glyphicon-folder-close'])
 		}
 		nodeIconlasses = nodeIconlasses.join(' ')
 
-		let nodeIconElemnt = (childCount === 0) ? <span className = {nodeIconlasses}></span> : <span className = {nodeIconlasses} onClick = {this.handleSwitch.bind(this)}></span>
-		let keyNameElement = (this.props.hasData) ? <span className = "leafLink" onClick = {this.handleClickLeaf.bind(this)}>{this.props.subKeyName}</span> : <span>{this.props.subKeyName}</span>
-		let reloadElement =  (childCount === 0) ? '' : <span className = "icon reload" onClick = {this.handleReload.bind(this)}></span>
+		let nodeIconElemnt = (childCount === 0) 
+			? <span className = {nodeIconlasses}></span>
+			: <span className = {nodeIconlasses} onClick = {this.handleSwitch}></span>
+
+		let keyNameElement = (hasData) 
+			? <span className = "leafLink" onClick = {this.handleClickLeaf}>{subKeyName}</span>
+			: <span>{subKeyName}</span>
+
+		let reloadElement = (childCount === 0) 
+			? ''
+			: <span className = "icon reload" onClick = {this.handleReload}></span>
 		
 		let childWrapClass = (this.state.isOpen) ? 'childWrap abc' : 'childWrap none'
-		let child = this.props.child.map((node, i) => {
-			let keyName = this.props.keyName+':'+node.subKeyName
+		let children = child.map((node, i) => {
+			let childKeyName = `${keyName}:${node.subKeyName}`
 			return (
 				<KeyNode
 					{...node}
-					showData = {this.props.showData}
-					keyName = {keyName}
-					key = {'key-'+i}
+					showData = {showData}
+					keyName = {childKeyName}
+					key = {`key-${i}`}
 				/>
 			)
 		})
@@ -50,7 +64,7 @@ export default class KeyNode extends Component {
 			<div className = "nodeWrap">
 				{nodeIconElemnt}{keyNameElement}{reloadElement}
 				<div className = {childWrapClass}>
-					{child}
+					{children}
 				</div>
 			</div>
 		)
