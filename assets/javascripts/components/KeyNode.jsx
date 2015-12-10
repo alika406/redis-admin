@@ -16,7 +16,8 @@ export default class KeyNode extends Component {
 		})
 	}
 	handleClickLeaf() {
-		this.props.showData(this.props.keyName)
+		const {showData, keyName} = this.props
+		showData(keyName)
 	}
 	handleReload() {
 		console.log('reload')

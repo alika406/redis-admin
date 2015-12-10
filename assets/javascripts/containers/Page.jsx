@@ -13,13 +13,16 @@ class Page extends Component {
 		this.showData = this.showData.bind(this)
 	}
 	componentDidMount() {
-		this.props.dispatch(initial(this.props.currentServerId))
+		const {dispatch, currentServerId} = this.props
+		dispatch(initial(currentServerId))
 	}
 	changeServer(serverId) {
-		this.props.dispatch(changeServer(serverId))
+		const {dispatch} = this.props
+		dispatch(changeServer(serverId))
 	}
 	showData(key) {
-		this.props.dispatch(showKeyData(this.props.currentServerId, key))
+		const {dispatch, currentServerId} = this.props
+		dispatch(showKeyData(currentServerId, key))
 	}
 	render() {
 		const {currentServerId, serverList, serverKeyNum, keyTree, dataPageKey, dataPageType, dataPageData} = this.props
