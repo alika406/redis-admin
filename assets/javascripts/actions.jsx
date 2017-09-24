@@ -1,5 +1,5 @@
 import axios from 'axios'
- 
+
 // action types
 export const INITIAL = 'INITIAL'
 export const CHANGE_SERVER = 'CHANGE_SERVER'
@@ -30,7 +30,7 @@ function showKeyDataActionCreator(key, keyData) {
 	}
 }
 
-// ajax function 
+// ajax function
 function getServerList() {
 	return axios.get('/server')
 }
@@ -47,7 +47,7 @@ function getKeyData(serverId, key) {
 	return axios.get('/data', {
 		params: {
 			serverId: serverId,
-			keyName: key	
+			keyName: key
 		}
 	})
 }
@@ -57,7 +57,7 @@ export function initial(defaultServerId) {
 		return axios.all([getServerList(), getKeys(defaultServerId)])
 			.then(axios.spread((serverResponse, keyResponse) => {
 				dispatch(initialActionCreator(serverResponse.data, keyResponse.data))
-			}))	
+			}))
 	}
 }
 

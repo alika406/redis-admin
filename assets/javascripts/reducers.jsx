@@ -15,7 +15,7 @@ export default function app (state = initState, action) {
 		case INITIAL:
 			return Object.assign({}, state, {
 				serverList: action.serverList,
-				serverKeyNum: action.keys.serverKeyNum,
+				serverKeyNum: action.keys.keyNum,
 				keyTree: action.keys.keyTree
 			})
 		case CHANGE_SERVER:
